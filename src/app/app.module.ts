@@ -4,7 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ConversationComponent } from './conversation/conversation.component';
-
+import { RouterModule, Routes } from '@angular/router';
+const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'conversation', component: ConversationComponent}
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,7 +17,8 @@ import { ConversationComponent } from './conversation/conversation.component';
     ConversationComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
