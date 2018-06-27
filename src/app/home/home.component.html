@@ -1,5 +1,5 @@
 <ng-container *ngFor="let user of users">
   <div *ngIf="user.friend">
-    {{user.nick}} ({{user.status}})
+    <a routerLink="/conversation/{{user.id}}">{{user.nick}} ({{user.status}})</a>
   </div>
 </ng-container>

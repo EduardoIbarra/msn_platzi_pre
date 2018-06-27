@@ -9,7 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'conversation', component: ConversationComponent}
+  {path: 'conversation/:user_id', component: ConversationComponent}
 ];
 @NgModule({
   declarations: [
