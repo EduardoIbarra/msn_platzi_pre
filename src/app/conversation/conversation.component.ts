@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-conversation',
@@ -8,9 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ConversationComponent implements OnInit {
   id: any;
-  constructor(public activatedRoute: ActivatedRoute) {
+  user: User;
+  constructor(public activatedRoute: ActivatedRoute, public userService: UserService) {
     this.id = activatedRoute.snapshot.params['user_id'];
-    console.log(this.id);
+    this.user = this.userService.getUserById(this.id);
   }
 
   ngOnInit() {
