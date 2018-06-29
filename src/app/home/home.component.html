@@ -3,14 +3,14 @@
     <div class="homeHeadContainer">
       <div class="row">
         <div class="col-md-auto">
-          <div class="avatarFrame{{me.status}}">
-            <img src="{{picture}}" id="homeAvatarPicture">
+          <div class="avatarFrameonline">
+            <img src="assets/img/generic_avatar.png" id="homeAvatarPicture">
           </div>
         </div>
         <div class="col">
-          <b>{{me.nick}}</b>
+          <b>Eduardo</b>
           <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-link" id="dropdownBasic1" ngbDropdownToggle>{{me.status}}</button>
+            <button class="btn btn-link" id="dropdownBasic1" ngbDropdownToggle>Online</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button class="dropdown-item" (click)="setUserProperty('status', 'online')">Conectado</button>
               <button class="dropdown-item" (click)="setUserProperty('status', 'away')">Ausente</button>
@@ -21,11 +21,7 @@
             </div>
           </div>
           <br />
-          <span (click)="startEditingSubnick()" *ngIf="!editingSubnick && !me.subnick">< Escribe un mensaje Personal ></span>
-          <span (click)="startEditingSubnick()" *ngIf="!editingSubnick && me.subnick">{{me.subnick}}</span>
-          <span *ngIf="editingSubnick">
-            <input id="subnickTxt" type="text" (keyup.enter)="setSubnick()" [(ngModel)]="me.subnick" autofocus>
-          </span>
+          <span>< Escribe un mensaje Personal ></span>
         </div>
       </div>
     </div>
@@ -40,12 +36,12 @@
       </div>
     </div>
     <hr />
-    <div class="row" *ngIf="me.users">
+    <div class="row" *ngIf="users">
       <div class="col-md-12">
         <fa name="chevron-down"></fa>
-        <b>Amigos ({{me.users.length}}/{{me.users.length}})</b>
+        <b>Amigos ({{users.length}}/{{users.length}})</b>
       </div>
-      <div class="col-md-12 contact-list-item" routerLink="/conversation/{{u.uid}}" *ngFor="let u of me.users">
+      <div class="col-md-12 contact-list-item" routerLink="/conversation/{{u.uid}}" *ngFor="let u of users">
         <img src="assets/img/logo_live_{{u.status || 'offline'}}.png" class="status">
         <b>{{u.nick}}</b>
         <small *ngIf="u.subnick"> - {{u.subnick}}</small>
