@@ -10,4 +10,7 @@ export class UserFirebaseService {
   getUsers() {
     return this.angularFireDatabase.list('/users');
   };
+  getUserById(userId) {
+    return this.angularFireDatabase.object('/users/' + userId);
+  };
 }
