@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../interfaces/user';
-import { UserService } from '../services/user.service';
+import { UserFirebaseService } from '../services/user-firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +9,10 @@ import { UserService } from '../services/user.service';
 })
 export class HomeComponent implements OnInit {
   users: User[];
-  constructor(public userService: UserService) {
-    this.users = userService.getUsers();
+  constructor(public userFirebaseService: UserFirebaseService) {
+    this.userFirebaseService.getUsers().valueChanges().subscribe((result: User[]) => {
+      this.users = result;
+    });
   }
 
   ngOnInit() {
