@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { User } from '../interfaces/user';
+import { UserFirebaseService } from '../services/user-firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class LoginComponent implements OnInit {
   user: any = {};
   operation = 'login';
-  constructor(public authenticationService: AuthenticationService) { }
+  constructor(public authenticationService: AuthenticationService, public userFirebaseService: UserFirebaseService) { }
 
   ngOnInit() {
   }
@@ -23,9 +25,19 @@ export class LoginComponent implements OnInit {
     });
   }
   register() {
-    this.authenticationService.registerWithEmail(this.user.email, this.user.password).then((result) => {
-      alert('Usuario registrado con éxito');
+    this.authenticationService.registerWithEmail(this.user.email, this.user.password).then((result: any) => {
       console.log(result);
+      const user: User = {
+        nick: this.user.nick,
+        subnick: '',
+        status: 'online',
+        email: this.user.email,
+        user_id: result.user.uid
+      };
+      this.userFirebaseService.createUser(user).then((result2) => {
+        alert('Usuario registrado con éxito');
+        console.log(result2);
+      });
     }).catch((error) => {
       alert('Ocurrió un error al intentar registrar el usuario');
       console.log(error);

@@ -13,4 +13,7 @@ export class UserFirebaseService {
   getUserById(userId) {
     return this.angularFireDatabase.object('/users/' + userId);
   }
+  createUser(user) {
+    return this.angularFireDatabase.object('/users/' + user.user_id).set(user);
+  }
 }
