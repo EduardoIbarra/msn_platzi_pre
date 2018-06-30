@@ -168,7 +168,7 @@ img.icon {
 #conversationMenuContainer > .item > img {
   height: 40px;
 }
-#generalContent {
+.generalContent {
   margin-top: 56px;
 }
 .loginContainer{

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interfaces/user';
 import { UserFirebaseService } from '../services/user-firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { UserFirebaseService } from '../services/user-firebase.service';
 export class LoginComponent implements OnInit {
   user: any = {};
   operation = 'login';
-  constructor(public authenticationService: AuthenticationService, public userFirebaseService: UserFirebaseService) { }
+  constructor(public authenticationService: AuthenticationService, public userFirebaseService: UserFirebaseService, public router: Router) { }
 
   ngOnInit() {
   }
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.loginWithEmail(this.user.email, this.user.password).then((result) => {
       alert('Usuario loggeado con éxito');
       console.log(result);
+      this.router.navigate(['home']);
     }).catch((error) => {
       alert('Ocurrió un error al intentar loggear el usuario');
       console.log(error);
