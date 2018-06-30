@@ -171,3 +171,27 @@ img.icon {
 #generalContent {
   margin-top: 56px;
 }
+.loginContainer{
+  background-image: url(./assets/img/msnbg.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.center {
+  text-align: center !important;
+}
+.borderedContainer {
+  border: 1px solid #cccccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+.grayButton {
+  min-width: 100px;
+  border-radius: 6px;
+  margin-top: 15px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7f7f7+0,eaeaea+50,e5e5e5+51,bab6b6+100 */
+  background: #f7f7f7; /* Old browsers */
+  background: -moz-linear-gradient(top, #f7f7f7 0%, #eaeaea 50%, #e5e5e5 51%, #bab6b6 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #f7f7f7 0%,#eaeaea 50%,#e5e5e5 51%,#bab6b6 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #f7f7f7 0%,#eaeaea 50%,#e5e5e5 51%,#bab6b6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#bab6b6',GradientType=0 ); /* IE6-9 */
+}
