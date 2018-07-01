@@ -17,7 +17,7 @@
               <button class="dropdown-item" (click)="setUserProperty('status', 'busy')">Ocupado</button>
               <button class="dropdown-item" (click)="setUserProperty('status', 'appear_offline')">Desconectado</button>
               <div class="dropdown-divider"></div>
-              <button routerLink="/login" class="dropdown-item">Cerrar Sesión</button>
+              <button (click)="logOut()" class="dropdown-item">Cerrar Sesión</button>
             </div>
           </div>
           <br />
