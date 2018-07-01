@@ -18,7 +18,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { LoginComponent } from './login/login.component';
 import {AuthenticationGuard} from './authentication.guard';
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthenticationGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard]},
   {path: 'conversation/:user_id', component: ConversationComponent, canActivate: [AuthenticationGuard]}
