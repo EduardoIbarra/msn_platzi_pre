@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthenticationGuard} from './authentication.guard';
 import { SettingsComponent } from './settings/settings.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
+import {SearchPipe} from './pipes/search';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthenticationGuard]},
   {path: 'login', component: LoginComponent},
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     ConversationComponent,
     MenuComponent,
     LoginComponent,
-    SettingsComponent
+    SettingsComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

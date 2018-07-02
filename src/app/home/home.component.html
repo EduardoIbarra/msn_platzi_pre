@@ -29,7 +29,7 @@
   <div class="whiteContainerPadded marto15">
     <div class="row">
       <div class="col">
-        <input type="text" class="form-control" placeholder="Buscar un contacto o un número...">
+        <input type="text" class="form-control" placeholder="Buscar un contacto o un número..." [(ngModel)]="query">
       </div>
       <div class="col-md-auto">
         <img src="assets/img/logo_live_add.png" class="icon" (click)="open(content)"  />
@@ -41,7 +41,7 @@
         <fa name="chevron-down"></fa>
         <b>Amigos ({{users.length}}/{{users.length}})</b>
       </div>
-      <div class="col-md-12 contact-list-item" routerLink="/conversation/{{u.user_id}}" *ngFor="let u of users">
+      <div class="col-md-12 contact-list-item" routerLink="/conversation/{{u.user_id}}" *ngFor="let u of users | search: query">
         <img src="assets/img/logo_live_{{u.status || 'offline'}}.png" class="status">
         <b>{{u.nick}}</b>
         <small *ngIf="u.subnick"> - {{u.subnick}}</small>
