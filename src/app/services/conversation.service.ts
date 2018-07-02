@@ -8,7 +8,7 @@ export class ConversationService {
 
   constructor(private angularFireDatabase: AngularFireDatabase) { }
   createConversation(conversation) {
-    return this.angularFireDatabase.object('conversations/' + conversation.user_id + '/' + conversation.timestamp).set(conversation);
+    return this.angularFireDatabase.object('conversations/' + conversation.uid + '/' + conversation.timestamp).set(conversation);
   }
   getConversations() {
     return this.angularFireDatabase.list('conversations/');
