@@ -16,14 +16,17 @@ export class ConversationComponent implements OnInit {
   friend: User;
   form: any = {message: ''};
   ids = [];
+  conversation: any = [];
   constructor(public activatedRoute: ActivatedRoute, public userFirebaseService: UserFirebaseService, public authenticationService: AuthenticationService, public conversationService: ConversationService) {
     this.id = activatedRoute.snapshot.params['user_id'];
-    this.userFirebaseService.getUserById(this.id).valueChanges().subscribe((result: User) => {
-      this.friend = result;
-    });
     this.authenticationService.getStatus().subscribe((response) => {
       this.userFirebaseService.getUserById(response.uid).valueChanges().subscribe((user) => {
         this.user = user;
+        this.userFirebaseService.getUserById(this.id).valueChanges().subscribe((result: User) => {
+          this.friend = result;
+          this.ids = [this.user.user_id, this.friend.user_id].sort();
+          this.getConversation();
+        });
       });
     });
   }
@@ -31,7 +34,6 @@ export class ConversationComponent implements OnInit {
   ngOnInit() {
   }
   sendMessage() {
-    this.ids = [this.user.user_id, this.friend.user_id].sort();
     const messageObject: any = {
       uid: this.ids.join('||'),
       timestamp: Date.now(),
@@ -44,6 +46,28 @@ export class ConversationComponent implements OnInit {
       // Mensaje enviado
     });
     this.form.message = '';
+  }
+  getConversation() {
+    this.conversationService.getConversation(this.ids.join('||')).valueChanges()
+      .subscribe((result) => {
+        if (!result) {
+          return;
+        }
+        this.conversation = Object.keys(result).map(function (key) { return result[key]; });
+        this.conversation.forEach((m: any) => {
+          if (!m.seen && m.sender !== this.user.user_id) {
+            m.seen = true;
+            this.conversationService.updateMessage(this.ids.join('||'), m);
+          }
+        });
+      });
+  }
+  getUserNickById(id) {
+    if (id === this.friend.user_id) {
+      return this.friend.nick;
+    } else if (id === this.user.user_id) {
+      return this.user.nick;
+    }
   }
 
 }

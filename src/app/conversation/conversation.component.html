@@ -20,9 +20,21 @@
       <span class="friendName">{{friend.nick}}</span> ({{friend.status}})
       <hr />
       <div class="vh55 overscroll pabo10" id="messageArea">
-         <!--
-          Messages
-         -->
+        <div class="messageGroup" *ngFor="let m of conversation">
+          <div *ngIf="m.type == 'text'">
+            {{getUserNickById(m.sender)}} dice: <br />
+            <ul>
+              <li>{{m.content}}</li>
+            </ul>
+          </div>
+          <div *ngIf="m.type == 'picture'">
+            {{getUserNickById(m.sender)}} envía: <br />
+            <img src="{{m.content}}" alt="Foto enviada" class="conversationPicture">
+          </div>
+          <div *ngIf="m.type == 'zumbido'">
+            {{getUserNickById(m.sender)}} envió un zumbido <br />
+          </div>
+        </div>
       </div>
       <div class="messageControlsContainer">
         <textarea class="form-control" cols="30" rows="5" [(ngModel)]="form.message" (keyup.enter)="sendMessage()"></textarea>
