@@ -2,19 +2,30 @@
   <div class="container pato45">
     <div class="row">
       <div class="col-md-3">
-        <div class="avatarFrame{{me.status}}" *ngIf="picture">
-          <img class="avatarImage img-fluid">
+        <div class="avatarFrame{{user.status}}" *ngIf="croppedImage || picture">
+          <img [src]="croppedImage || picture" class="avatarImage img-fluid">
         </div>
         <hr />
         <div class="">
           <span>Cambiar Foto</span><br />
           <label class="custom-file-upload">
-            <input type="file" />
+            <input type="file" (change)="fileChangeEvent($event)" />
             Subir Avatar
           </label>
         </div>
       </div>
 
+      <div class="col-md-9">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1 / 1"
+          [resizeToWidth]="800"
+          format="jpeg"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
 
       <div class="col-md-9">
         <div>

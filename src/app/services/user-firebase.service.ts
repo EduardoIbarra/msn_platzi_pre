@@ -16,4 +16,11 @@ export class UserFirebaseService {
   createUser(user) {
     return this.angularFireDatabase.object('/users/' + user.user_id).set(user);
   }
+  editUser(user) {
+    return this.angularFireDatabase.object('/users/' + user.user_id).set(user);
+  }
+  setProfilePicture(picture_url, user_id) {
+    this.angularFireDatabase.object('users/' + user_id + '/downloaded_picture').set(true);
+    return this.angularFireDatabase.object('users/' + user_id + '/avatar_url').set(picture_url);
+  }
 }
