@@ -60,6 +60,7 @@ export class ConversationComponent implements OnInit {
             this.conversationService.updateMessage(this.ids.join('||'), m);
           }
         });
+        this.scrollToBottom();
       });
   }
   getUserNickById(id) {
@@ -68,6 +69,14 @@ export class ConversationComponent implements OnInit {
     } else if (id === this.user.user_id) {
       return this.user.nick;
     }
+  }
+  scrollToBottom() {
+    window.setTimeout(() => {
+      const objDiv = document.getElementById('messageArea');
+      if (objDiv) {
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }
+    }, 1);
   }
 
 }
