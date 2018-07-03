@@ -41,11 +41,7 @@
         <fa name="chevron-down"></fa>
         <b>Amigos ({{users.length}}/{{users.length}})</b>
       </div>
-      <div class="col-md-12 contact-list-item" routerLink="/conversation/{{u.user_id}}" *ngFor="let u of users | search: query">
-        <img src="assets/img/logo_live_{{u.status || 'offline'}}.png" class="status">
-        <b>{{u.nick}}</b>
-        <small *ngIf="u.subnick"> - {{u.subnick}}</small>
-      </div>
+      <app-contact class="col-md-12" *ngFor="let u of users | search: query" [user_id]="u.user_id"></app-contact>
     </div>
   </div>
 </div>
