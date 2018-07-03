@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   users: User[];
+  query: string;
   constructor(public userFirebaseService: UserFirebaseService, public authenticationService: AuthenticationService, public router: Router) {
     this.userFirebaseService.getUsers().valueChanges().subscribe((result: User[]) => {
       this.users = result;

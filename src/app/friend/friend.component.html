@@ -1,0 +1,5 @@
+<div *ngIf="friend"  class="contact-list-item" routerLink="/conversation/{{friend.user_id}}">
+  <img src="assets/img/logo_live_{{friend.status || 'offline'}}.png" class="status">
+  <b>{{friend.nick}}</b>
+  <small *ngIf="friend.subnick"> - {{friend.subnick}}</small>
+</div>

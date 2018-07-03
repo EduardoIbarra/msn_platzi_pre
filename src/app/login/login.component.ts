@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   register() {
     this.authenticationService.registerWithEmail(this.user.email, this.user.password).then((result: any) => {
       console.log(result);
-      const user: User = {
+      const user: any = {
         nick: this.user.nick,
         subnick: '',
         status: 'online',

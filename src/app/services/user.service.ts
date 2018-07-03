@@ -5,7 +5,7 @@ import { User } from '../interfaces/user';
   providedIn: 'root'
 })
 export class UserService {
-  users: User[] = [
+  users: any[] = [
     {user_id: 1, nick: 'Eduardo', subnick: 'Mi mensaje personal', status: 'online', email: 'eduardo@platzi.com'},
     {user_id: 2, nick: 'Yuliana', subnick: 'Mi mensaje personal', status: 'busy', email: 'yuliana@platzi.com'},
     {user_id: 3, nick: 'Nicole', subnick: 'Mi mensaje personal', status: 'away', email: 'freddy@platzi.com'},

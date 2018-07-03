@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  user: User;
+  user: any;
   picture: any;
   imageChangedEvent: any = '';
   croppedImage: any = '';
