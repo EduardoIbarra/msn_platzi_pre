@@ -17,10 +17,11 @@ export class ConversationComponent implements OnInit {
   form: any = {message: ''};
   ids = [];
   conversation: any = [];
+  shake = false;
   constructor(public activatedRoute: ActivatedRoute, public userFirebaseService: UserFirebaseService, public authenticationService: AuthenticationService, public conversationService: ConversationService) {
     this.id = activatedRoute.snapshot.params['user_id'];
     this.authenticationService.getStatus().subscribe((response) => {
-      this.userFirebaseService.getUserById(response.uid).valueChanges().subscribe((user) => {
+      this.userFirebaseService.getUserById(response.uid).valueChanges().subscribe((user: User) => {
         this.user = user;
         this.userFirebaseService.getUserById(this.id).valueChanges().subscribe((result: User) => {
           this.friend = result;
@@ -46,6 +47,17 @@ export class ConversationComponent implements OnInit {
       // Mensaje enviado
     });
     this.form.message = '';
+  }
+  sendZumbido() {
+    this.doZumbido();
+    const messageObject: any = {
+      uid: this.ids.join('||'),
+      timestamp: Date.now(),
+      sender: this.user.user_id,
+      receiver: this.friend.user_id,
+      type: 'zumbido',
+    };
+    this.conversationService.createConversation(messageObject);
   }
   getConversation() {
     this.conversationService.getConversation(this.ids.join('||')).valueChanges()
@@ -77,6 +89,14 @@ export class ConversationComponent implements OnInit {
         objDiv.scrollTop = objDiv.scrollHeight;
       }
     }, 1);
+  }
+  doZumbido() {
+    const audio = new Audio('assets/sound/zumbido.m4a');
+    audio.play();
+    this.shake = true;
+    window.setTimeout(() => {
+      this.shake = false;
+    }, 800);
   }
 
 }
