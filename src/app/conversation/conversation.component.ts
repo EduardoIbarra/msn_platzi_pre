@@ -68,6 +68,9 @@ export class ConversationComponent implements OnInit {
         this.conversation = Object.keys(result).map(function (key) { return result[key]; });
         this.conversation.forEach((m: any) => {
           if (!m.seen && m.sender !== this.user.user_id) {
+            if (m.type === 'zumbido') {
+              this.doZumbido();
+            }
             m.seen = true;
             this.conversationService.updateMessage(this.ids.join('||'), m);
           }
