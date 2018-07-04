@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.user_id);
-    this.userFirebaseService.getUserById(this.user_id).valueChanges().subscribe((response) => {
+    this.userFirebaseService.getUserById(this.user_id).valueChanges().subscribe((response: User) => {
       this.contact = response;
     });
   }

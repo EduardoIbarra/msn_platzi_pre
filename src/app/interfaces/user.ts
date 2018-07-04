@@ -5,5 +5,5 @@ export interface User {
   email: string;
   user_id: any;
   avatar_url: string;
-  downloaded_picture: string;
+  downloaded_picture: boolean;
 }
