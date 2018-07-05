@@ -45,3 +45,26 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-content bluewhitebluebg">
+    <div class="modal-header bgWhite">
+      Agregar Amigo
+      <a class="closeButton" (click)="d('Cross click')">&times;</a>
+    </div>
+    <div class="modal-body">
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          <b>Ingresa el email de tu amigo</b>
+          <input class="form-control" type="email" placeholder="Ingresar Email" [(ngModel)]="requestEmail" (keyup.enter)="sendRequest()">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="grayButton" (click)="sendRequest()" autofocus>Enviar</button>
+      <button class="grayButton" (click)="d('Cross click')">Cancelar</button>
+    </div>
+  </div>
+</ng-template>
