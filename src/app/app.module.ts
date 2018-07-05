@@ -8,7 +8,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -22,6 +21,8 @@ import {ImageCropperModule} from 'ngx-image-cropper';
 import {SearchPipe} from './pipes/search';
 import { ContactComponent } from './contact/contact.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {BootstrapModalModule} from 'ng2-bootstrap-modal';
+import {FriendRequestModalComponent} from './modals/friend-request/friend-request.modal';
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthenticationGuard]},
   {path: 'login', component: LoginComponent},
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     LoginComponent,
     SettingsComponent,
     SearchPipe,
-    ContactComponent
+    ContactComponent,
+    FriendRequestModalComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +54,11 @@ const appRoutes: Routes = [
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireDatabaseModule,
     ImageCropperModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    BootstrapModalModule.forRoot({container: document.body})
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FriendRequestModalComponent]
 })
 export class AppModule { }

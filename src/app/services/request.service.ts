@@ -13,9 +13,9 @@ export class RequestService {
     console.log(request, cleanEmail);
     return this.afDb.object('requests/' + cleanEmail + '/' + request.sender).set(request);
   }
-  setRequestStatus(request, status){
+  setRequestStatus(request, status) {
     const cleanEmail = request.receiver_email.replace('.', ',');
-    return this.afDb.object('requests/' + cleanEmail + '/' + request.sender.uid + '/status').set(status);
+    return this.afDb.object('requests/' + cleanEmail + '/' + request.sender + '/status').set(status);
   }
   getRequestsForEmail(email) {
     const cleanEmail = email.replace('.', ',');

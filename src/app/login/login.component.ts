@@ -34,7 +34,9 @@ export class LoginComponent implements OnInit {
         subnick: '',
         status: 'online',
         email: this.user.email,
-        user_id: result.user.uid
+        user_id: result.user.uid,
+        avatar_url: '',
+        downloaded_picture: false
       };
       this.userFirebaseService.createUser(user).then((result2) => {
         alert('Usuario registrado con éxito');
