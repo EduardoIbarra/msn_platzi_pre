@@ -32,7 +32,7 @@
         <input type="text" class="form-control" placeholder="Buscar un contacto o un número..." [(ngModel)]="query">
       </div>
       <div class="col-md-auto">
-        <img src="assets/img/logo_live_add.png" class="icon" (click)="open(content)"  />
+        <img src="assets/img/logo_live_add.png" class="icon" (click)="open(content)" />
       </div>
     </div>
     <hr />
@@ -49,3 +49,20 @@
     </div>
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Agregar Amigo</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b>Ingresar el email de tu amigo</b>
+    <input type="text" class="form-control" placeholder="Agregar amigo" [(ngModel)]="requestEmail">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cancel click')">Cancelar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="sendRequest()">Enviar</button>
+  </div>
+</ng-template>

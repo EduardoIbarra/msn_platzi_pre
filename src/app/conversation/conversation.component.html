@@ -1,4 +1,4 @@
-<div class="conversationContainer bluewhitebg">
+<div class="conversationContainer bluewhitebg" [ngClass]="{'shaker': doingZumbido}">
   <div class="row">
     <div class="col-sm-3 maxwi300">
       <div id="conversationSidebar">
@@ -19,13 +19,18 @@
       <br />
       <span class="friendName">{{friend.nick}}</span> ({{friend.status}})
       <hr />
-      <div class="vh55 overscroll pabo10" id="messageArea">
-         <!--
-          Messages
-         -->
+      <div class="vh55" id="messageArea">
+         <div class="message" *ngFor="let message of conversation">
+           <span *ngIf="message.type == 'text'">
+            {{ getNickById(message.sender) }} dice: {{message.content}}
+           </span>
+           <span *ngIf="message.type == 'zumbido'">
+            {{ getNickById(message.sender) }} envió un zumbido
+           </span>
+         </div>
       </div>
       <div class="messageControlsContainer">
-        <textarea class="form-control" cols="30" rows="5" [(ngModel)]="form.message"></textarea>
+        <textarea class="form-control" cols="30" rows="5" [(ngModel)]="message" (keyup.enter)="sendMessage()"></textarea>
         <div id="messageToolBar">
           <div class="item">
             <img src="assets/img/icons/regular_smile.gif" class="tool">
@@ -36,7 +41,7 @@
             <fa name="caret-down"></fa>
           </div>
           <div class="item" >
-            <img src="assets/img/zumbido.png" class="tool">
+            <img src="assets/img/zumbido.png" (click)="sendZumbido()" class="tool">
           </div>
 
           <a class="btn btn-primary btn-sm marri10" accept="image/*">Enviar</a>
