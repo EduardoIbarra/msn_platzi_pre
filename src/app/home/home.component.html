@@ -36,16 +36,12 @@
       </div>
     </div>
     <hr />
-    <div class="row" *ngIf="users">
+    <div class="row" *ngIf="user && user.friends">
       <div class="col-md-12">
         <fa name="chevron-down"></fa>
-        <b>Amigos ({{users.length}}/{{users.length}})</b>
+        <b>Amigos ({{user.friends.length}}/{{user.friends.length}})</b>
       </div>
-      <div class="col-md-12 contact-list-item" routerLink="/conversation/{{u.user_id}}" *ngFor="let u of users | search: query">
-        <img src="assets/img/logo_live_{{u.status || 'offline'}}.png" class="status">
-        <b>{{u.nick}}</b>
-        <small *ngIf="u.subnick"> - {{u.subnick}}</small>
-      </div>
+      <app-contact class="col-md-12" *ngFor="let u of user.friends | search: query" [user_id]="u"></app-contact>
     </div>
   </div>
 </div>
@@ -64,5 +60,37 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="d('Cancel click')">Cancelar</button>
     <button type="button" class="btn btn-outline-dark" (click)="sendRequest()">Enviar</button>
+  </div>
+</ng-template>
+
+
+<ng-template #friendRequest let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Solicitud de Amistad</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-auto">
+        <img src="http://via.placeholder.com/100x100">
+      </div>
+      <div class="col-md">
+        <b>{{currentRequest.sender.email}}</b><br />
+        <small>{{currentRequest.sender.nick}}</small>
+      </div>
+    </div>
+    <hr />
+    Deseas agregar a esta persona a messenger?<br />
+    <input type="radio" [(ngModel)]="shouldAdd" name="addToMsn" value="yes" id="yes-add">
+    <label for="yes-add"> <b>Sí.</b> Los contactos de Messenger forman parte de tu red</label>
+    <br />
+    <input type="radio" [(ngModel)]="shouldAdd" name="addToMsn" value="no" id="no-add">
+    <label for="no-add"> <b>No, gracias.</b> No te preocupes, no le diremos a nadie que dijiste que no.</label>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline-dark" (click)="accept();d()" autofocus>Aceptar</button>
+    <button class="btn btn-outline-dark" (click)="decline();d()">Decidir más Tarde</button>
   </div>
 </ng-template>
