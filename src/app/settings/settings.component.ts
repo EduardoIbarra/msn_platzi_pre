@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
   croppedImage: any = '';
   constructor(public userFirebaseService: UserFirebaseService, public authenticationService: AuthenticationService, public fbStorage: AngularFireStorage, public router: Router) {
     this.authenticationService.getStatus().subscribe((status) => {
-      this.userFirebaseService.getUserById(status.uid).valueChanges().subscribe((result) => {
+      this.userFirebaseService.getUserById(status.uid).valueChanges().subscribe((result: User) => {
         this.user = result;
         this.picture = (this.user.downloaded_picture) ? this.user.avatar_url :
           'https://wir.skyrock.net/wir/v1/profilcrop/?c=mog&w=301&h=301&im=%2Fart%2FPRIP.85914100.3.0.png';
