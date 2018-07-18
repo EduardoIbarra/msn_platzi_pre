@@ -36,12 +36,12 @@
       </div>
     </div>
     <hr />
-    <div class="row" *ngIf="users">
+    <div class="row" *ngIf="user && user.friends">
       <div class="col-md-12">
         <fa name="chevron-down"></fa>
-        <b>Amigos ({{users.length}}/{{users.length}})</b>
+        <b>Amigos ({{user.friends.length}}/{{user.friends.length}})</b>
       </div>
-      <app-contact class="col-md-12" *ngFor="let u of users | search: query" [user_id]="u.user_id"></app-contact>
+      <app-contact class="col-md-12" *ngFor="let u of user.friends | search: query" [user_id]="u"></app-contact>
     </div>
   </div>
 </div>

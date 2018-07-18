@@ -21,7 +21,10 @@ export class HomeComponent implements OnInit {
       this.users = result;
     });
     this.authenticationService.getStatus().subscribe((status: any) => {
-      this.user = status;
+      this.userFirebaseService.getUserById(status.uid).valueChanges().subscribe((result: User[]) => {
+        this.user = result;
+        this.user.friends = Object.values(this.user.friends);
+      });
     });
   }
 
