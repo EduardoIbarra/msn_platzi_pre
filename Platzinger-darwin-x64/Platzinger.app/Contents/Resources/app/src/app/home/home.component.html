@@ -1,0 +1,70 @@
+<div class="homeContainer">
+  <div class="whiteBorderGlassBox">
+    <div class="homeHeadContainer">
+      <div class="row">
+        <div class="col-md-auto">
+          <div class="avatarFrameonline">
+            <img src="assets/img/generic_avatar.png" id="homeAvatarPicture">
+          </div>
+        </div>
+        <div class="col">
+          <b>Eduardo</b>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-link" id="dropdownBasic1" ngbDropdownToggle>Online</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button class="dropdown-item" (click)="setUserProperty('status', 'online')">Conectado</button>
+              <button class="dropdown-item" (click)="setUserProperty('status', 'away')">Ausente</button>
+              <button class="dropdown-item" (click)="setUserProperty('status', 'busy')">Ocupado</button>
+              <button class="dropdown-item" (click)="setUserProperty('status', 'appear_offline')">Desconectado</button>
+              <div class="dropdown-divider"></div>
+              <button (click)="logOut()" class="dropdown-item">Cerrar Sesión</button>
+            </div>
+          </div>
+          <br />
+          <span>< Escribe un mensaje Personal ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="whiteContainerPadded marto15">
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Buscar un contacto o un número..." [(ngModel)]="query">
+      </div>
+      <div class="col-md-auto">
+        <img src="assets/img/logo_live_add.png" class="icon" (click)="open(content)"  />
+      </div>
+    </div>
+    <hr />
+    <div class="row" *ngIf="user && user.friends">
+      <div class="col-md-12">
+        <fa name="chevron-down"></fa>
+        <b>Amigos ({{user.friends.length}}/{{user.friends.length}})</b>
+      </div>
+      <app-contact class="col-md-12" *ngFor="let u of user.friends | search: query" [user_id]="u"></app-contact>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-content bluewhitebluebg">
+    <div class="modal-header bgWhite">
+      Agregar Amigo
+      <a class="closeButton" (click)="d('Cross click')">&times;</a>
+    </div>
+    <div class="modal-body">
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          <b>Ingresa el email de tu amigo</b>
+          <input class="form-control" type="email" placeholder="Ingresar Email" [(ngModel)]="requestEmail" (keyup.enter)="sendRequest()">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="grayButton" (click)="sendRequest()" autofocus>Enviar</button>
+      <button class="grayButton" (click)="d('Cross click')">Cancelar</button>
+    </div>
+  </div>
+</ng-template>
